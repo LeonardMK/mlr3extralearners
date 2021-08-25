@@ -2,7 +2,7 @@ install_learners("regr.nnet")
 
 test_that("regr.nnet train", {
   learner = lrn("regr.nnet")
-  fun = nnet::nnet
+  fun = nnet::nnet.formula
   exclude = c(
     "object", # handled internally
     "data" # handled internally

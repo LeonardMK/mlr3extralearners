@@ -17,8 +17,6 @@
 #'   - Adjusted default: 3L.
 #'   - Reason for change: no default in `nnet()`.
 #'
-#' @references
-#' `r format_bib("ripley_1996")`
 #'
 #' @export
 #' @template seealso_learner
@@ -52,7 +50,7 @@ LearnerRegrNnet = R6Class("LearnerRegrNnet",
                                   super$initialize(
                                       id = "regr.nnet",
                                       packages = "nnet",
-                                      feature_types = c("numeric", "factor", "ordered"),
+                                      feature_types = c("integer", "numeric", "factor", "ordered"),
                                       predict_types = c("response"),
                                       param_set = ps,
                                       properties = c("weights"),
@@ -69,18 +67,17 @@ LearnerRegrNnet = R6Class("LearnerRegrNnet",
                                   }
                                   formula = task$formula()
                                   data = task$data()
-                                  invoke(nnet::nnet.formula, formula = formula, data = data, .args = pv)
+                                  invoke(nnet::nnet.formula, formula = formula, data = data, .args = pv, linout = TRUE)
                               },
                               
                               .predict = function(task) {
                                   
-                                  # get parameters with tag "predict"
-                                  pars = self$param_set$get_values(tags = "predict")
-                                  
                                   newdata = task$data(cols = task$feature_names)
                                   
-                                  response = invoke(predict, self$model, newdata = newdata, type = "response", .args = pars)
+                                  response = invoke(predict, self$model, newdata = newdata, type = "raw")
                                   return(list(response = response))
                               }
                           )
 )
+.extralrns_dict$add("regr.nnet", LearnerRegrNnet)
+
