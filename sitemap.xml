@@ -181,6 +181,9 @@
     <loc>https://mlr3extralearners.mlr-org.com/reference/mlr_learners_regr.mob.html</loc>
   </url>
   <url>
+    <loc>https://mlr3extralearners.mlr-org.com/reference/mlr_learners_regr.nnet.html</loc>
+  </url>
+  <url>
     <loc>https://mlr3extralearners.mlr-org.com/reference/mlr_learners_regr.randomForest.html</loc>
   </url>
   <url>
